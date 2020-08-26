@@ -2,6 +2,8 @@ import React from "react";
 import { HashRouter as Router, Route } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import "./App.css";
+import FrontPage from "./FrontPage";
+import CreateRoom from "./CreateRoom";
 
 const App: React.FC = () => {
   return (
@@ -14,9 +16,10 @@ const App: React.FC = () => {
         justify="center"
         style={{ minHeight: '100vh' }}
       >
-        <Grid item xs={3}>
-          <h1>Linkify</h1>
-        </Grid>
+        <Router>
+          <Route exact path="/" component={FrontPage} />
+          <Route path="/createRoom" component={CreateRoom} />
+        </Router>
 
       </Grid>
     </React.Fragment>
