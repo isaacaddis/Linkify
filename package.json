@@ -8,7 +8,8 @@
     "@types/react-router-dom": "^5.1.5",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "request-promise": "^4.2.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
@@ -42,7 +43,7 @@
     "lint": "npm run lint:js && npm run lint:ts",
     "lint:js": "eslint --ext .js,.jsx --cache '**/*.{jsx,js}' --fix",
     "lint:ts": "tslint -c tslint.json -p tslint-tsconfig.json --fix",
-    "start:server": "cd server && ts-node-dev --respawn --transpileOnly ./server.ts && wait-on tcp:5000",
+    "start:server": "cd server && ts-node-dev --respawn --transpileOnly ./Server.ts && wait-on tcp:5000",
     "start:app": "react-scripts start",
     "start": "run-p --race start:server start:app",
     "build": "react-scripts build",
