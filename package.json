@@ -16,7 +16,8 @@
     "react-router-dom": "^5.2.0",
     "react-spotify-web-playback": "^0.6.0",
     "request-promise": "^4.2.6",
-    "spotify-web-api-node": "^4.0.0"
+    "spotify-web-api-node": "^4.0.0",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",

@@ -12,4 +12,5 @@ const dataStore = new Map<string, room>();
  */
 export const createRoom = (id: string, room: room) => {
     dataStore.set(id, room);
+    return true;
 }

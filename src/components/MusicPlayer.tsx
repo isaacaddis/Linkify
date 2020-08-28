@@ -1,6 +1,4 @@
 import React, { useState, useCallback } from "react";
-import PropTypes, { InferProps } from 'prop-types';
-// import SpotifyPlayerContainer from "./SpotifyPlayerContainer";
 import SpotifyWebPlayer, { STATUS } from 'react-spotify-web-playback';
 
 type MusicProps = {
@@ -8,7 +6,7 @@ type MusicProps = {
 }
 
 const MusicPlayer: React.SFC<MusicProps> = (props) => {
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
     const handleCallback = useCallback(({ type, ...state }) => {
         console.group(`RSWP: ${type}`);
         console.log(state);
@@ -23,6 +21,7 @@ const MusicPlayer: React.SFC<MusicProps> = (props) => {
 
     return (
         <div className="musicPlayer">
+            <>{isPlaying ? <h2>Now Playing</h2> : <h2>Paused</h2>}</>
             <SpotifyWebPlayer
                 autoPlay={true}
                 token={props.accessToken}
@@ -35,19 +34,6 @@ const MusicPlayer: React.SFC<MusicProps> = (props) => {
                     sliderColor: '#1cb954',
                 }}
             />
-            {/* <SpotifyWebPlayer
-                autoPlay={false}
-                callback={handleCallback}
-                persistDeviceSelection
-                play={isPlaying}
-                showSaveIcon
-                syncExternalDevice
-                token={token}
-                styles={{
-                    sliderColor: '#1cb954',
-                }}
-                uris={URIs}
-            /> */}
         </div>
     )
 }
