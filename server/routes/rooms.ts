@@ -1,4 +1,4 @@
-import { createRoom } from "../Store";
+import { createRoom, getRoom } from "../Store";
 const uuid = require('uuid');
 
 export const handleCreateRoom = (req: any, res: any) => {
@@ -6,5 +6,19 @@ export const handleCreateRoom = (req: any, res: any) => {
     const hostName = req.body.hostName;
     const roomId = uuid.v4();
     const success = createRoom(roomId, { roomName: roomName, hostName: hostName });
-    (success ? res.sendStatus(200) : res.sendStatus(400))
+    if (success) {
+        //redirect
+        const uri = `http://localhost:3000/room?roomName=${roomName}&hostName=${hostName}`;
+        console.log(`Redirecting to ${uri} ...`);
+        res.redirect(uri);
+    }
+    else {
+        res.sendStatus(400);
+    }
+}
+
+export const handleGetRoom = (req: any, res: any) => {
+    const roomId = req.query.id;
+    const room = getRoom(roomId);
+    return room;
 }

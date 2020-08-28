@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import "./App.css";
 import FrontPage from "./pages/FrontPage";
 import CreateRoom from "./pages/CreateRoom";
-import SuccessPage from "./pages/SuccessPage";
+import Room from "./pages/Room";
 
 const App: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const App: React.FC = () => {
       >
         <Router>
           <Route exact path="/" component={FrontPage} />
-          <Route path="/success" render={(props) => <SuccessPage {...props} />} />
+          <Route path="/room" component={Room} />
           <Route path="/createRoom" component={CreateRoom} />
         </Router>
 
