@@ -7,7 +7,7 @@ const FrontPage: React.FC = () => {
         <React.Fragment>
             <h1>Linkify</h1>
             <p>Listen to music together virtually.</p>
-            <Link to="/createRoom" style={{ textDecoration: 'none', backgroundColor: '#3DD8A0'}}>
+            <Link to="/createRoom" style={{ textDecoration: 'none', backgroundColor: '#1DB954'}}>
                 <Button variant="outlined" color="primary">
                     Create a Room
                 </Button>

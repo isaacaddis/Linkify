@@ -24,7 +24,7 @@ export const handleLogin = (req: any, res: any) => {
 }
 
 export const handleCallback = async (req: any, res: any) => {
-
+    console.log(`Now handling callback...`)
     // your application requests refresh and access tokens
     // after checking the state parameter
 
