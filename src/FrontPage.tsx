@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import * as QueryString from "query-string"
+import { getAuth, writeAuth, getProfile } from "./auth/Auth";
 
 
 const FrontPage: React.FC = (props: any) => {
-    console.log(`Got props: `)
-    console.log(props)
-    console.log(`Props location`)
-    console.log(props.location)
+    const [auth, setAuth] = useState(getAuth())
+    const [displayName, setDisplayName] = useState("");
+
     const params = QueryString.parse(props.location.search);
     const access_token = params.access_token;
     console.log(`Access Token: ${access_token}`)
+
+    /*
+        First check if in local storage, setAuth
+    */
+    useEffect(() => {
+        if (access_token) {
+            writeAuth(access_token);
+            setAuth(getAuth());
+        }
+        if (auth){
+            getProfile(auth).then(displayName => setDisplayName(displayName))
+        }
+    }, [])
+
     return (
         <React.Fragment>
             <h1>Linkify</h1>
-            {access_token ? <h1>Welcome, {access_token}</h1> : <h2>Not logged in.</h2>}
+            {displayName ? <h1>Welcome, {displayName}</h1> : <h2>Not logged in.</h2>}
             <p>Listen to music together virtually.</p>
-            <Link to="/createRoom" style={{ textDecoration: 'none', backgroundColor: '#1DB954'}}>
+            <Link to="/createRoom" style={{ textDecoration: 'none', backgroundColor: '#1DB954' }}>
                 <Button variant="outlined" color="primary">
                     Create a Room
                 </Button>
