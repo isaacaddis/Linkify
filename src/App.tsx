@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import "./App.css";
-import FrontPage from "./FrontPage";
-import CreateRoom from "./CreateRoom";
-import SuccessPage from "./SuccessPage";
+import FrontPage from "./pages/FrontPage";
+import CreateRoom from "./pages/CreateRoom";
+import SuccessPage from "./pages/SuccessPage";
 
 const App: React.FC = () => {
   return (

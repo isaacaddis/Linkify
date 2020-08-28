@@ -13,9 +13,6 @@ const FrontPage: React.FC = (props: any) => {
     const access_token = params.access_token;
     console.log(`Access Token: ${access_token}`)
 
-    /*
-        First check if in local storage, setAuth
-    */
     useEffect(() => {
         if (access_token) {
             writeAuth(access_token);
