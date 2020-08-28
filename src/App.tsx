@@ -1,9 +1,10 @@
 import React from "react";
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import "./App.css";
 import FrontPage from "./FrontPage";
 import CreateRoom from "./CreateRoom";
+import SuccessPage from "./SuccessPage";
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
       >
         <Router>
           <Route exact path="/" component={FrontPage} />
+          <Route path="/success" render={(props) => <SuccessPage {...props} />} />
           <Route path="/createRoom" component={CreateRoom} />
         </Router>
 

@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
-const FrontPage: React.FC = () => {
+const FrontPage: React.FC = (props: any) => {
+    console.log(`Got props: `)
+    console.log(props)
     return (
         <React.Fragment>
             <h1>Linkify</h1>
