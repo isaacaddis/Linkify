@@ -12,6 +12,15 @@ const MusicPlayer: React.SFC<MusicProps> = (props) => {
             <SpotifyPlayer
                 token={props.accessToken}
                 uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
+                styles={{
+                    bgColor: '#333',
+                    color: '#fff',
+                    loaderColor: '#fff',
+                    sliderColor: '#1cb954',
+                    savedColor: '#fff',
+                    trackArtistColor: '#ccc',
+                    trackNameColor: '#fff',
+                  }}
             />;
         </div>
     )
