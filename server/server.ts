@@ -16,6 +16,14 @@ app.use(cookieParser());
 // tslint:disable-next-line:no-console
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+app.get('/', (req: any, res: any) => {
+    console.log(`Req query: `)
+    console.log(req.query)
+    const access_token = req.query.access_token;
+    const uri = `http://localhost:3000/?access_token=${access_token}`;
+    console.log(`Redirecting to ${uri} ...`)
+    res.redirect(uri)
+})
 
 app.get('/login', handleLogin);
 

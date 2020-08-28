@@ -53,7 +53,8 @@ export const handleCallback = async (req: any, res: any) => {
             json: true,
             resolveWithFullResponse: true
         };
-
+        console.log(`Now POSTing /api/token with options: `);
+        console.log(authOptions);
         const response = await request(authOptions);
         const body = response.body;
         try {
@@ -70,11 +71,12 @@ export const handleCallback = async (req: any, res: any) => {
 
                 // use the access token to access the Spotify Web API
                 request.get(options, function (error, response, body) {
+                    console.log(`Profile: `)
                     console.log(body);
                 });
 
                 // we can also pass the token to the browser to make requests from there
-                res.redirect('/#' +
+                res.redirect('/?' +
                     querystring.stringify({
                         access_token: access_token,
                         refresh_token: refresh_token
