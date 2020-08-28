@@ -4,6 +4,11 @@
 export const getAuth = () => localStorage.getItem('accessToken')
 
 /**
+ * Removes accessToken from the localStorage
+ */
+export const removeToken = () => localStorage.removeItem('accessToken');
+
+/**
  * Sets the key "spotifyAuth" to [token] in localStorage
  * @param token 
  */
