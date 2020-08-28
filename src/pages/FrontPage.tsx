@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import * as QueryString from "query-string"
-import { getAuth, writeAuth, getProfile } from "./auth/Auth";
+import { getAuth, writeAuth, getProfile } from "../Auth";
 
 
 const FrontPage: React.FC = (props: any) => {
@@ -15,6 +15,7 @@ const FrontPage: React.FC = (props: any) => {
 
     useEffect(() => {
         if (access_token) {
+            console.log(`Got access token`)
             writeAuth(access_token);
             setAuth(getAuth());
         }

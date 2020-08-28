@@ -1,21 +1,14 @@
 /**
- * @returns [true] if a spotifyAuth key exists in localStorage
+ * @returns access token cookie
  */
-export const verifyAuth = () => {
-    console.log(`Now verifying auth...`);
-    const spotifyAuth = localStorage.getItem("spotifyAuth");
-    console.log(spotifyAuth)
-    return ((spotifyAuth) ? false : true);
-}
-
-export const getAuth = () => localStorage.getItem('spotifyAuth')
+export const getAuth = () => localStorage.getItem('accessToken')
 
 /**
  * Sets the key "spotifyAuth" to [token] in localStorage
  * @param token 
  */
 export const writeAuth = (token: any) => {
-    localStorage.setItem('spotifyAuth', token);
+    localStorage.setItem('accessToken', token);
 }
 
 export const getProfile = async (access_token: any) => {
