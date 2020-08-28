@@ -18,6 +18,7 @@ const FrontPage: React.FC = (props: any) => {
             console.log(`Got access token`)
             writeAuth(access_token);
             setAuth(getAuth());
+            getProfile(access_token).then(displayName => setDisplayName(displayName))
         }
         if (auth){
             getProfile(auth).then(displayName => setDisplayName(displayName))
