@@ -20,7 +20,7 @@ const FrontPage: React.FC = (props: any) => {
             setAuth(getAuth());
             getProfile(access_token).then(displayName => setDisplayName(displayName))
         }
-        if (auth){
+        if (auth) {
             getProfile(auth).then(displayName => setDisplayName(displayName))
         }
     }, [])
@@ -30,11 +30,18 @@ const FrontPage: React.FC = (props: any) => {
             <h1>Linkify</h1>
             {displayName ? <h1>Welcome, {displayName}</h1> : <h2>Not logged in.</h2>}
             <p>Listen to music together virtually.</p>
-            <Link to="/createRoom" style={{ textDecoration: 'none', backgroundColor: '#1DB954' }}>
-                <Button variant="outlined" color="primary">
-                    Create a Room
+            {auth ?
+                <Link to="/createRoom" style={{ textDecoration: 'none', backgroundColor: '#1DB954' }}>
+                    <Button variant="outlined" color="primary">
+                        Create a Room
                 </Button>
-            </Link>
+                </Link>
+                :
+                <Button href="http://localhost:5000/login" style={{ textDecoration: "none", backgroundColor: "#1DB954" }}>
+                    Login to Spotify
+                </Button>
+
+            }
         </React.Fragment>
     );
 }
