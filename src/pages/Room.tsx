@@ -16,8 +16,7 @@ const Room: React.SFC<{ location: any }> = (props) => {
     const params = QueryString.parse(props.location.search);
 
     const roomId = params.roomId;
-    // const roomName = params.roomName;
-    // const hostName = params.hostName;
+
     const [roomName, setRoomName] = useState("");
     const [hostName, setHostName] = useState("");
     const accessToken = getAuth();
@@ -50,7 +49,6 @@ const Room: React.SFC<{ location: any }> = (props) => {
                 body: JSON.stringify(payload)
             }
             const response = await fetch(endpoint, options);
-            // add to queue
             setSuccess(true);
             setSuccessMessage("Added to queue 🎉")
         }
@@ -70,14 +68,24 @@ const Room: React.SFC<{ location: any }> = (props) => {
         setRoomName(room.roomName);
         setHostName(room.hostName);
     }
-    /**
-     * 
-     * Fetch queue of room
-     * set it to the React hook
-     * 
-     */
+
+    const serviceWorker = () => {
+        const task = async () => {
+            console.log(`Now looking for queue updates...`)
+            const queueEndpoint = `http://localhost:5000/getRoom?id=${roomId}`
+            const response = await fetch(queueEndpoint, { method: "GET" });
+            const json = await response.json();
+            const _queue = json.room.queue;
+            if(queue.sort() != _queue.sort){
+                setQueue(_queue);
+            }
+        }
+        setInterval(task, 1000);
+    }
+
     useEffect(() => {
         getQueue();
+        serviceWorker();
     }, []);
     return (
         <React.Fragment>
