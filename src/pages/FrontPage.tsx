@@ -25,10 +25,15 @@ const FrontPage: React.FC = (props: any) => {
         }
     }, [])
 
+    const getFirstNameOnly = (fullname: string) => {
+        const split = fullname.split(" ");
+        return split[0];
+    }
+
     return (
         <React.Fragment>
             <h1>Linkify</h1>
-            {displayName ? <h3>Welcome, {displayName}</h3> : <h3>Not logged in.</h3>}
+            {displayName ? <h3>Welcome, {getFirstNameOnly(displayName)}</h3> : <h3>Not logged in.</h3>}
             <p>Listen to music together virtually.</p>
             {auth ?
                 <Link to="/createRoom" style={{ textDecoration: 'none'}}>

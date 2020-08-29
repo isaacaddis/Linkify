@@ -85,7 +85,7 @@ const Room: React.SFC<{ location: any }> = (props) => {
                 setQueue(_queue);
             }
         }
-        setInterval(task, 1000);
+        setInterval(task, 500);
     }
 
     useEffect(() => {
