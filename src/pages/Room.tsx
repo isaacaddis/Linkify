@@ -7,6 +7,7 @@ import CssTextField from "../ui/CSSTextField"
 import { FormStyles } from "../ui/Util";
 import ErrorSnackbar from "../dialogs/ErrorDialog";
 import SuccessSnackbar from "../dialogs/SuccessSnackbar";
+import QueueContainer from "../components/QueueContainer";
 
 
 const Room: React.SFC<{ location: any }> = (props) => {
@@ -54,10 +55,6 @@ const Room: React.SFC<{ location: any }> = (props) => {
         }
     }
 
-    const listQueue = queue.map((entry) => {
-        return (<li>{entry}</li>)
-    });
-
     const getQueue = async () => {
         // get queue
         const queueEndpoint = `http://localhost:5000/getRoom?id=${roomId}`
@@ -76,7 +73,7 @@ const Room: React.SFC<{ location: any }> = (props) => {
             const response = await fetch(queueEndpoint, { method: "GET" });
             const json = await response.json();
             const _queue = json.room.queue;
-            if(queue.sort() != _queue.sort){
+            if (queue.sort() != _queue.sort) {
                 setQueue(_queue);
             }
         }
@@ -91,19 +88,6 @@ const Room: React.SFC<{ location: any }> = (props) => {
         <React.Fragment>
             <h1>Now in room: <strong>{roomName}</strong></h1>
             <h2>Host: {hostName}</h2>
-            <h2>Current Song Queue: </h2>
-            <ul>
-                {listQueue}
-            </ul>
-            <Grid container justify="center">
-                {accessToken ?
-                    //@ts-ignore
-                    <MusicPlayer accessToken={accessToken} queue={queue} />
-                    :
-                    <Button href="http://localhost:5000/login" style={{ textDecoration: "none", backgroundColor: "#1DB954" }}>Login to Spotify</Button>
-                }
-            </Grid>
-            <br />
             <Grid container justify="center" spacing={3}>
                 <Grid item>
                     <CssTextField
@@ -125,6 +109,18 @@ const Room: React.SFC<{ location: any }> = (props) => {
                     <Button onClick={addUri} className={classes.button} size="large" >Add to Queue</Button>
                 </Grid>
             </Grid>
+            <h2>Current Song Queue: </h2>
+            <QueueContainer roomId={roomId} queue={queue} />
+
+            <Grid container justify="center">
+                {accessToken ?
+                    //@ts-ignore
+                    <MusicPlayer accessToken={accessToken} queue={queue} />
+                    :
+                    <Button href="http://localhost:5000/login" style={{ textDecoration: "none", backgroundColor: "#1DB954" }}>Login to Spotify</Button>
+                }
+            </Grid>
+            <br />
             <SuccessSnackbar
                 open={isSuccess}
                 onClose={() => setSuccess(false)}

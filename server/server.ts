@@ -1,6 +1,7 @@
 import express from "express";
 import { handleLogin, handleCallback, handleRefreshToken } from "./routes/auth";
-import { handleCreateRoom, handleGetRoom, handleAddQueue } from "./routes/rooms"
+import { handleCreateRoom, handleGetRoom, handleAddQueue, handleDeleteRoomEntry } from "./routes/rooms";
+
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const app = express();
@@ -9,9 +10,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(cookieParser());
 const port = process.env.PORT || 5000;
-
-
-
 
 // tslint:disable-next-line:no-console
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -35,6 +33,7 @@ app.get('/room/:id', handleGetRoom);
 
 app.get('/getRoom', handleGetRoom);
 
+app.post('/deleteRoomEntry', handleDeleteRoomEntry);
 
 app.post('/createRoom', handleCreateRoom);
 
