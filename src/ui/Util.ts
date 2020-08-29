@@ -16,7 +16,7 @@ export const FormStyles = makeStyles({
     },
     button: {
         backgroundColor: "#1DB954",
-        color: "white",
+        // color: "white",
         textTransform: "none",
         "&:hover": {
             backgroundColor: "#1DB954"

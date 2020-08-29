@@ -104,7 +104,7 @@ const CreateRoom: React.FC = () => {
                             value={values.hostName}
                         />
                         <Grid item>
-                            <Button onClick={submitCreateRoom} className={classes.button} size="large" color="primary">Get Started</Button>
+                            <Button style={{ backgroundColor: "#1DB954" }} onClick={submitCreateRoom} className={classes.button} size="large">Get Started</Button>
                         </Grid>
                     </Grid>
                 </form>

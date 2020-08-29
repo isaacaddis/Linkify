@@ -23,20 +23,19 @@ const RoomPreviewDialog: React.SFC<RoomPreviewProps> = (props) => {
                 maxWidth="xl"
                 TransitionComponent={Grow}
                 PaperProps={{
-                    style: {
-                        backgroundColor: "#1C2B56",
-                    },
                 }}
                 open={props.open}
                 aria-labelledby="form-dialog-title" >
-                <DialogTitle style={{ color: 'white' }} disableTypography id="form-dialog-title">
-                    You're all set!
+                <DialogTitle style={{ }} disableTypography id="form-dialog-title">
+                    <h1>You're all set!</h1>
                 </DialogTitle>
-                <h4>Share this link with your friends: </h4>
-                <p>{props.url}</p>
-                <CopyToClipboard text={props.url} onCopy={() => setCopied(true)}>
-                    <Button color="default">Copy</Button>
-                </CopyToClipboard>
+                <DialogContent>
+                    <h4>Share this link with your friends: </h4>
+                    <p>{props.url}</p>
+                    <CopyToClipboard text={props.url} onCopy={() => setCopied(true)}>
+                        <Button style={{ backgroundColor: "#1DB954"}}>Copy</Button>
+                    </CopyToClipboard>
+                </DialogContent>
             </Dialog>
             <SuccessSnackbar
                 open={copied}

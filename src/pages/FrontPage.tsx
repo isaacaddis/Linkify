@@ -31,10 +31,10 @@ const FrontPage: React.FC = (props: any) => {
             {displayName ? <h1>Welcome, {displayName}</h1> : <h2>Not logged in.</h2>}
             <p>Listen to music together virtually.</p>
             {auth ?
-                <Link to="/createRoom" style={{ textDecoration: 'none', backgroundColor: '#1DB954' }}>
-                    <Button variant="outlined" color="primary">
+                <Link to="/createRoom" style={{ textDecoration: 'none'}}>
+                    <Button variant="outlined" style={{ backgroundColor: "#1DB954"}}>
                         Create a Room
-                </Button>
+                    </Button>
                 </Link>
                 :
                 <Button href="http://localhost:5000/login" style={{ textDecoration: "none", backgroundColor: "#1DB954" }}>

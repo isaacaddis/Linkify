@@ -95,15 +95,16 @@ const Room: React.SFC<{ location: any }> = (props) => {
             <ul>
                 {listQueue}
             </ul>
-            <div>
+            <Grid container justify="center">
                 {accessToken ?
                     //@ts-ignore
                     <MusicPlayer accessToken={accessToken} queue={queue} />
                     :
                     <Button href="http://localhost:5000/login" style={{ textDecoration: "none", backgroundColor: "#1DB954" }}>Login to Spotify</Button>
                 }
-            </div>
-            <Grid container justify="center">
+            </Grid>
+            <br />
+            <Grid container justify="center" spacing={3}>
                 <Grid item>
                     <CssTextField
                         autoFocus
@@ -121,7 +122,7 @@ const Room: React.SFC<{ location: any }> = (props) => {
                     />
                 </Grid>
                 <Grid item>
-                    <Button onClick={addUri} className={classes.button} size="large" color="primary">Add to Queue</Button>
+                    <Button onClick={addUri} className={classes.button} size="large" >Add to Queue</Button>
                 </Grid>
             </Grid>
             <SuccessSnackbar
