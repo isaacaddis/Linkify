@@ -9,17 +9,21 @@ const Room: React.SFC<{ location: any }> = (props) => {
     const [queue, setQueue] = useState("");
     const params = QueryString.parse(props.location.search);
     const roomId = params.roomId;
-    const roomName = params.roomName;
-    const hostName = params.hostName;
+    // const roomName = params.roomName;
+    // const hostName = params.hostName;
+    const [roomName, setRoomName] = useState("");
+    const [hostName, setHostName] = useState("");
     const accessToken = getAuth();
 
     const getQueue = async () => {
-        alert("Getting queue...")
         // get queue
-        const queueEndpoint = `http://localhost:5000/getQueue?id=${roomId}`
+        const queueEndpoint = `http://localhost:5000/getRoom?id=${roomId}`
         const response = await fetch(queueEndpoint, { method: "GET" });
         const json = await response.json();
-        setQueue(json.queue);
+        const room = json.room;
+        setQueue(room.queue);
+        setRoomName(room.roomName);
+        setHostName(room.hostName);
     }
     /**
      * 

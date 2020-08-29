@@ -33,7 +33,7 @@ app.get('/refresh_token', handleRefreshToken);
 
 app.get('/room/:id', handleGetRoom);
 
-app.get('/getQueue', handleGetQueue);
+app.get('/getRoom', handleGetRoom);
 
 
 app.post('/createRoom', handleCreateRoom);
