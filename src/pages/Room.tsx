@@ -6,6 +6,7 @@ import { getAuth } from "../Auth";
 import CssTextField from "../ui/CSSTextField"
 import { FormStyles } from "../ui/Util";
 import ErrorSnackbar from "../dialogs/ErrorDialog";
+import InformationSnackbar from "../dialogs/InformationDialog";
 import SuccessSnackbar from "../dialogs/SuccessSnackbar";
 import QueueContainer from "../components/QueueContainer";
 
@@ -26,6 +27,9 @@ const Room: React.SFC<{ location: any }> = (props) => {
 
     const [isSuccess, setSuccess] = useState(false);
     const [successMessage, setSuccessMessage] = useState("Success 🎉");
+
+    const [isInfo, setInfo] = useState(false);
+    const [infoMessage, setInfoMessage] = useState("");
 
     const [isError, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("There was an error with your input.")
@@ -102,6 +106,30 @@ const Room: React.SFC<{ location: any }> = (props) => {
         setInterval(task, 500);
     }
 
+
+    const handleSongFinished = async () => {
+        setInfo(true);
+        setInfoMessage("Song finished. Now playing next in queue.")
+        // send shift request to server and get new queue
+        const endpoint = "http://localhost:5000/shiftQueue"
+        const payload = {
+            roomId: roomId,
+        }
+        const options = {
+            method: "post",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }
+        console.log(`Now fetching /shiftQueue ...`)
+        const response = await fetch(endpoint, options);
+        const json = await response.json();
+        const new_queue = json.new_queue;
+        setQueue(new_queue);
+    }
+
     useEffect(() => {
         getQueue();
         serviceWorker();
@@ -115,9 +143,9 @@ const Room: React.SFC<{ location: any }> = (props) => {
                     <CssTextField
                         autoFocus
                         style={{ width: 300, color: 'white' }}
-                        label="Add song (by Artist URI)"
-                        placeholder="Artist URI"
-                        name="artistURI"
+                        label="Add song (by Artist or Album URI)"
+                        placeholder="URI"
+                        name="uri"
                         onChange={e => setUri(e.target.value)}
                         InputLabelProps={{
                             className: classes.label,
@@ -137,7 +165,7 @@ const Room: React.SFC<{ location: any }> = (props) => {
             <Grid container justify="center">
                 {accessToken ?
                     //@ts-ignore
-                    <MusicPlayer accessToken={accessToken} queue={queue} />
+                    <MusicPlayer accessToken={accessToken} queue={queue} onSongFinished={handleSongFinished} />
                     :
                     <Button href="http://localhost:5000/login" style={{ textDecoration: "none", backgroundColor: "#1DB954" }}>Login to Spotify</Button>
                 }
@@ -147,6 +175,11 @@ const Room: React.SFC<{ location: any }> = (props) => {
                 open={isSuccess}
                 onClose={() => setSuccess(false)}
                 message={successMessage}
+            />
+            <InformationSnackbar
+                open={isInfo}
+                onClose={() => setInfo(false)}
+                message={infoMessage}
             />
             <ErrorSnackbar
                 open={isError}

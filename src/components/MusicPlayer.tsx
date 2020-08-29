@@ -3,15 +3,23 @@ import SpotifyWebPlayer, { STATUS } from 'react-spotify-web-playback';
 
 type MusicProps = {
     accessToken: string,
-    queue: string[]
+    queue: string[],
+    onSongFinished: () => any
 }
 
 const MusicPlayer: React.SFC<MusicProps> = (props) => {
     const [isPlaying, setIsPlaying] = useState(true);
     const handleCallback = useCallback(({ type, ...state }) => {
-        console.group(`RSWP: ${type}`);
+        console.log("STATE: ")
         console.log(state);
         console.groupEnd();
+
+        const position = state.position;
+
+        if (position === 100) {
+            console.log("Song finished");
+            props.onSongFinished();
+        }
 
         setIsPlaying(state.isPlaying);
 

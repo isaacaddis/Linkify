@@ -17,9 +17,9 @@ export const handleCreateRoom = (req: any, res: any) => {
 
 export const handleGetRoom = (req: any, res: any) => {
     const roomId = req.query.id;
-    console.log(`Got request to retrieve room ${roomId}`)
+    // console.log(`Got request to retrieve room ${roomId}`)
     const room = getRoom(roomId);
-    console.log(room)
+    // console.log(room)
     res.json({ room: room });
 }
 
@@ -30,6 +30,14 @@ export const handleAddQueue = (req: any, res: any) => {
     const room = getRoom(roomId);
     room.queue.push(uri);
     res.sendStatus(200);
+}
+
+export const handleShiftQueue = (req: any, res: any) => {
+    const roomId = req.body.roomId;
+    console.log(`Got request to shift queue in room ${roomId}`)
+    const room = getRoom(roomId);
+    room.queue.shift();
+    res.json({new_queue: room.queue});
 }
 
 export const handleDeleteRoomEntry = (req: any, res: any) => {
