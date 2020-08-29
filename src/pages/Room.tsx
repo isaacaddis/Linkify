@@ -126,7 +126,7 @@ const Room: React.SFC<{ location: any }> = (props) => {
             </Grid>
             <SuccessSnackbar
                 open={isSuccess}
-                onClose={() => setSuccess(true)}
+                onClose={() => setSuccess(false)}
                 message={successMessage}
             />
             <ErrorSnackbar
