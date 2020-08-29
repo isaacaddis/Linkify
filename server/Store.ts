@@ -9,11 +9,11 @@ type room = {
  */
 const getRandomSong = () => {
     const defaultSongs = [
-        "spotify:artist:23fqKkggKUBHNkbKtXEls4", 
-        // "spotify:track:2rYiDn8FjwBnBPtZDP8to3",
-        // "spotify:track:59eluCMn0XbOWqeWQ91FTM",
-        // "spotify:track:1gUAX2ImxDsB3YDcyxMXlB",
-        // "spotify:track:0hIc8aKWVFAnQ6asXfuEEn"
+        "spotify:artist:23fqKkggKUBHNkbKtXEls4",
+        "spotify:artist:3srPc1Mytv5GmTWqsQuoXW",
+        "spotify:artist:3PWp9R5HvbQgxI5KBx5kVd",
+        "spotify:artist:1EowJ1WwkMzkCkRomFhui7",
+        "spotify:artist:3NTbOmzlj2cL86XFuDVFvZ",
     ]
     return defaultSongs[Math.floor(Math.random() * defaultSongs.length)];
 }
