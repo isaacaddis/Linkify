@@ -56,7 +56,7 @@ const QueueContainer: React.SFC<QueueContainerProps> = (props) => {
         return (<QueueView roomId={props.roomId} uri={entry} />)
     });
     return (
-        <Grid container justify="center">
+        <Grid container justify="center" style={{ width: "75%" }}>
             {entries}
         </Grid>
     );

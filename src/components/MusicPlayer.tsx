@@ -29,8 +29,8 @@ const MusicPlayer: React.SFC<MusicProps> = (props) => {
                 uris={props.queue}
                 callback={handleCallback}
                 persistDeviceSelection
+                magnifySliderOnHover={true}
                 play={isPlaying}
-                showSaveIcon
                 styles={{
                     sliderColor: '#1cb954',
                 }}

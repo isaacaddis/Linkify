@@ -30,8 +30,22 @@ const Room: React.SFC<{ location: any }> = (props) => {
     const [isError, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("There was an error with your input.")
 
+    const validateURI = (input: string): boolean => {
+        let isValid = false;
+
+        if (input && input.indexOf(':') > -1) {
+            const [key, type, id] = input.split(':');
+
+            if (key && type && type !== 'user' && id && id.length === 22) {
+                isValid = true;
+            }
+        }
+
+        return isValid;
+    };
+
     const addUri = async () => {
-        if (uri.length < 2) {
+        if (!validateURI(uri)) {
             setError(true);
             setErrorMessage("This URI doesn't look correct.")
         }
