@@ -17,6 +17,8 @@ First and foremost, Spotify requires you to have a Premium account to use the We
 
 There is also a problem with the playback, and only artists seem to work (not individual tracks). You can find the URIs of any artist you want from Spotify from clicking Share > Copy Spotify URI. 
 
+Another thing to note is that Spotify Access Tokens expire relatively quickly, but in a future update this possibly can be prepared for ahead of time. The current solution is just to grab the access token on login and then write it into localStorage.
+
 
 ### Technical Challenges
 
