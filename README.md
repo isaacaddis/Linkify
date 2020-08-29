@@ -24,3 +24,9 @@ Another thing to note is that Spotify Access Tokens expire relatively quickly, b
 
 1. Setting up the OAuth flow with Spotify and our tech stack (React + Typescript with an Express server to handle routing and server-side logic)
 2. Getting the music player to play music
+
+
+### Future Improvements
+
+1. Make the queue votable
+2. Expand the player to work with all types of media from Spotify
