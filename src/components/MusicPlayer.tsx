@@ -2,7 +2,8 @@ import React, { useState, useCallback } from "react";
 import SpotifyWebPlayer, { STATUS } from 'react-spotify-web-playback';
 
 type MusicProps = {
-    accessToken: string
+    accessToken: string,
+    queue: string[]
 }
 
 const MusicPlayer: React.SFC<MusicProps> = (props) => {
@@ -25,7 +26,7 @@ const MusicPlayer: React.SFC<MusicProps> = (props) => {
             <SpotifyWebPlayer
                 autoPlay={true}
                 token={props.accessToken}
-                uris={['spotify:artist:23fqKkggKUBHNkbKtXEls4']}
+                uris={props.queue}
                 callback={handleCallback}
                 persistDeviceSelection
                 play={isPlaying}

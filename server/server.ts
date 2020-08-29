@@ -1,6 +1,6 @@
 import express from "express";
 import { handleLogin, handleCallback, handleRefreshToken } from "./routes/auth";
-import { handleCreateRoom } from "./routes/rooms"
+import { handleCreateRoom, handleGetRoom, handleGetQueue } from "./routes/rooms"
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const app = express();
@@ -30,5 +30,10 @@ app.get('/login', handleLogin);
 app.get('/callback', handleCallback);
 
 app.get('/refresh_token', handleRefreshToken);
+
+app.get('/room/:id', handleGetRoom);
+
+app.get('/getQueue', handleGetQueue);
+
 
 app.post('/createRoom', handleCreateRoom);
