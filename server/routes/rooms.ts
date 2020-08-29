@@ -24,10 +24,11 @@ export const handleGetRoom = (req: any, res: any) => {
     res.json({room: room});
 }
 
-export const handleGetQueue = (req: any, res: any) => {
-    const roomId = req.query.id;
-    console.log(`Got request to retrieve queue for room ${roomId}`)
+
+export const handleAddQueue = (req: any, res: any) => {
+    const roomId = req.body.roomId;
+    const uri = req.body.uri;
     const room = getRoom(roomId);
-    const queue = room.queue;
-    res.json({queue: queue})
+    room.queue.push(uri);
+    res.sendStatus(200);
 }
