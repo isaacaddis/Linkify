@@ -9,8 +9,7 @@ export const handleCreateRoom = (req: any, res: any) => {
     if (success) {
         //redirect
         const uri = `http://localhost:3000/room?roomName=${roomName}&hostName=${hostName}`;
-        console.log(`Redirecting to ${uri} ...`);
-        res.redirect(uri);
+        res.json({ uri: uri });
     }
     else {
         res.sendStatus(400);
@@ -20,5 +19,5 @@ export const handleCreateRoom = (req: any, res: any) => {
 export const handleGetRoom = (req: any, res: any) => {
     const roomId = req.query.id;
     const room = getRoom(roomId);
-    return room;
+    res.json(room);
 }

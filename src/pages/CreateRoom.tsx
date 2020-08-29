@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import { getAuth } from "../Auth";
-import MusicPlayer from "../components/MusicPlayer";
 import CssTextField from "../ui/CSSTextField"
 import Grid from '@material-ui/core/Grid';
 import { FormStyles } from '../ui/Util';
+import RoomPreviewDialog from "../dialogs/RoomPreviewDialog";
+
 
 
 const CreateRoom: React.FC = () => {
@@ -12,6 +13,9 @@ const CreateRoom: React.FC = () => {
 
     const [accessToken, setAccessToken] = useState(getAuth());
     const [spotifyPlayer, setSpotifyPlayer] = useState(undefined);
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [url, setURL] = useState("");
 
     type formValues = {
         roomName: string,
@@ -52,6 +56,12 @@ const CreateRoom: React.FC = () => {
         }
         const response = await fetch(uri, options);
         console.log(`Created room with statusCode: ${response.status}`)
+        if (response.status === 200) {
+            const json = await response.json();
+            const uri = json.uri;
+            setURL(uri);
+            setModalOpen(true);
+        }
     }
 
     return (
@@ -99,13 +109,11 @@ const CreateRoom: React.FC = () => {
                     </Grid>
                 </form>
             </Grid>
-            {/* <div>
-                {accessToken ?
-                    <MusicPlayer accessToken={accessToken} />
-                    :
-                    <Button href="http://localhost:5000/login" style={{ textDecoration: "none", backgroundColor: "#1DB954" }}>Login to Spotify</Button>
-                }
-            </div> */}
+            <RoomPreviewDialog
+                url={url}
+                open={modalOpen}
+            />
+
         </React.Fragment>
     );
 }
