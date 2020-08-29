@@ -28,7 +28,7 @@ const FrontPage: React.FC = (props: any) => {
     return (
         <React.Fragment>
             <h1>Linkify</h1>
-            {displayName ? <h1>Welcome, {displayName}</h1> : <h2>Not logged in.</h2>}
+            {displayName ? <h3>Welcome, {displayName}</h3> : <h3>Not logged in.</h3>}
             <p>Listen to music together virtually.</p>
             {auth ?
                 <Link to="/createRoom" style={{ textDecoration: 'none'}}>

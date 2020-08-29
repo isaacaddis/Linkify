@@ -118,9 +118,10 @@ const CreateRoom: React.FC = () => {
                             }}
                             value={values.hostName}
                         />
-                        <Grid item>
-                            <Button style={{ backgroundColor: "#1DB954" }} onClick={submitCreateRoom} className={classes.button} size="large">Get Started</Button>
-                        </Grid>
+                    </Grid>
+                    <br />
+                    <Grid item alignItems="center"> 
+                        <Button style={{ backgroundColor: "#1DB954" }} onClick={submitCreateRoom} className={classes.button} size="large">Get Started</Button>
                     </Grid>
                 </form>
             </Grid>
