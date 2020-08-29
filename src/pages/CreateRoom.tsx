@@ -5,11 +5,16 @@ import CssTextField from "../ui/CSSTextField"
 import Grid from '@material-ui/core/Grid';
 import { FormStyles } from '../ui/Util';
 import RoomPreviewDialog from "../dialogs/RoomPreviewDialog";
+import ErrorSnackbar from "../dialogs/ErrorDialog";
 
 
 
 const CreateRoom: React.FC = () => {
     const classes = FormStyles();
+
+    const [isError, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("Error");
+
 
     const [accessToken, setAccessToken] = useState(getAuth());
     const [spotifyPlayer, setSpotifyPlayer] = useState(undefined);
@@ -43,24 +48,34 @@ const CreateRoom: React.FC = () => {
     }
 
     const submitCreateRoom = async () => {
-        console.log(`Submitting create room with values`)
-        console.log(values)
-        const uri = "http://localhost:5000/createRoom"
-        const options = {
-            method: "post",
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(values)
+        if (values.roomName.length < 1) {
+            setError(true);
+            setErrorMessage("You must enter a room name.")
         }
-        const response = await fetch(uri, options);
-        console.log(`Created room with statusCode: ${response.status}`)
-        if (response.status === 200) {
-            const json = await response.json();
-            const uri = json.uri;
-            setURL(uri);
-            setModalOpen(true);
+        else if (values.hostName.length < 1) {
+            setError(true);
+            setErrorMessage("You must enter a host name.")
+        }
+        else {
+            console.log(`Submitting create room with values`)
+            console.log(values)
+            const uri = "http://localhost:5000/createRoom"
+            const options = {
+                method: "post",
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            }
+            const response = await fetch(uri, options);
+            console.log(`Created room with statusCode: ${response.status}`)
+            if (response.status === 200) {
+                const json = await response.json();
+                const uri = json.uri;
+                setURL(uri);
+                setModalOpen(true);
+            }
         }
     }
 
@@ -112,6 +127,11 @@ const CreateRoom: React.FC = () => {
             <RoomPreviewDialog
                 url={url}
                 open={modalOpen}
+            />
+            <ErrorSnackbar
+                open={isError}
+                onClose={() => setError(false)}
+                message={errorMessage}
             />
 
         </React.Fragment>
