@@ -66,6 +66,14 @@ const Room: React.SFC<{ location: any }> = (props) => {
         setHostName(room.hostName);
     }
 
+    /**
+     * Sorts without modifying [arr]
+     * @param arr 
+     */
+    const sort = (arr: any[]) => {
+        return arr.concat().sort();
+    }
+
     const serviceWorker = () => {
         const task = async () => {
             console.log(`Now looking for queue updates...`)
@@ -73,7 +81,7 @@ const Room: React.SFC<{ location: any }> = (props) => {
             const response = await fetch(queueEndpoint, { method: "GET" });
             const json = await response.json();
             const _queue = json.room.queue;
-            if (queue.sort() != _queue.sort) {
+            if (sort(queue) != sort(_queue)) {
                 setQueue(_queue);
             }
         }
